@@ -47,4 +47,3 @@ public class AppConfig {
         return localSessionFactoryBean;
     }
 }
-

@@ -31,7 +31,6 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         String comand = scanner.nextLine();
         commandReader(comand);
-
     }
 
     private void commandReader(String command) {
