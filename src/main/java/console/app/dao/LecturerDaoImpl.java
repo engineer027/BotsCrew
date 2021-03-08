@@ -1,6 +1,6 @@
 package console.app.dao;
 
-import console.app.excention.NoSuchElementException;
+import console.app.excention.DataProcessingException;
 import console.app.model.Lecturer;
 import java.util.List;
 import org.hibernate.Session;
@@ -27,7 +27,7 @@ public class LecturerDaoImpl implements LecturerDao {
             getMovieSession.setParameter("template", "%" + template + "%");
             return getMovieSession.getResultList();
         } catch (Exception e) {
-            throw new NoSuchElementException("Can`t get orders history where user Id: "
+            throw new DataProcessingException("Can`t get orders history where user Id: "
                     + template, e);
         }
     }
@@ -46,7 +46,7 @@ public class LecturerDaoImpl implements LecturerDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new NoSuchElementException("Can't insert lecturer entity " + lecturer, e);
+            throw new DataProcessingException("Can't insert lecturer entity " + lecturer, e);
         } finally {
             if (session != null) {
                 session.close();

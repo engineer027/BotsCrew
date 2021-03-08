@@ -2,6 +2,7 @@ package console.app.service;
 
 import console.app.dao.DepartmentDao;
 import console.app.dto.DepartmentStatisticDto;
+import console.app.excention.DataProcessingException;
 import console.app.model.Department;
 import console.app.model.Lecturer;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public DepartmentStatisticDto getDepartmentStatisticDto(String departmentName) {
         DepartmentStatisticDto departmentStatisticDto = new DepartmentStatisticDto();
-        departmentStatisticDto.setDepartment(departmentDao.findByName(departmentName).get());
+        departmentStatisticDto.setDepartment(departmentDao.findByName(departmentName)
+                .orElseThrow(() ->new RuntimeException("We don't have department "+ departmentName)));
         departmentStatisticDto.setMapStatistic(departmentDao
                 .getDepartmentStatistic(departmentName));
         return departmentStatisticDto;

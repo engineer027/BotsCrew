@@ -1,6 +1,6 @@
 package console.app.dao;
 
-import console.app.excention.NoSuchElementException;
+import console.app.excention.DataProcessingException;
 import console.app.model.Degree;
 import console.app.model.Department;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new NoSuchElementException("Can't insert department entity " + department, e);
+            throw new DataProcessingException("Can't insert department entity " + department, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -57,7 +57,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             }
             return mapStatistic;
         } catch (Exception e) {
-            throw new RuntimeException("Can't get " + departmentName
+            throw new DataProcessingException("Can't get " + departmentName
                     + " department statistic.", e);
         }
     }
@@ -70,7 +70,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             query.setParameter("name", departmentName);
             return query.getSingleResult();
         } catch (Exception e) {
-            throw new RuntimeException("Can't get count of employee with department = "
+            throw new DataProcessingException("Can't get count of employee with department = "
                     + departmentName, e);
         }
     }
@@ -84,7 +84,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             query.setParameter("name", departmentName);
             return query.getSingleResult();
         } catch (Exception e) {
-            throw new RuntimeException("Can't get count of employee with department = "
+            throw new DataProcessingException("Can't get count of employee with department = "
                     + departmentName, e);
         }
     }
@@ -98,7 +98,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             query.setParameter("name", name);
             return query.uniqueResultOptional();
         } catch (Exception e) {
-            throw new RuntimeException("Can't get Department with name = " + name, e);
+            throw new DataProcessingException("Can't get Department with name = " + name, e);
         }
     }
 }
